@@ -1,0 +1,18 @@
+{
+  "name": "back-projeto-desenvolve",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
+    "express": "^4.19.2"
+  }
+}

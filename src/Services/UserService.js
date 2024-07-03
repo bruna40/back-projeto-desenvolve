@@ -1,14 +1,14 @@
-import User from '../models/UserModel.js'
 import bcrypt from 'bcryptjs'
+import { UserRepository } from '../repositories/UserRepository.js'
 
 export class UserService {
-  constructor(userRepository) {
-    this.userRepository = userRepository
+  constructor() {
+    this.userRepository = new UserRepository()
   }
 
   async createUser({ name, email, passwordHash }) {
     try {
-      const userWithEmail = await User.findOne({ email })
+      const userWithEmail = await this.userRepository.findByEmail(email)
       if (userWithEmail) {
         throw new Error(`Email ${email} already exists`)
       }

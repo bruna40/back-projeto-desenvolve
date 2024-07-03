@@ -3,10 +3,9 @@ import { UserRepository } from '../repositories/UserRepository.js'
 
 export const userCreate = async (req, res) => {
   const { name, email, passwordHash } = req.body
-  const userRepository = new UserRepository() // Instancia o UserRepository
+  const userRepository = new UserRepository()
 
   try {
-    // Instancia o UserService passando o UserRepository
     const userService = new UserService(userRepository)
 
     await userService.createUser({ name, email, passwordHash })

@@ -10,11 +10,18 @@ export class UserRepository {
         passwordHash,
       })
 
-      console.log('Novo usuário criado:', newUser)
       return newUser
     } catch (error) {
-      // Tratamento de erros
-      console.error('Erro ao criar usuário:', error)
+      throw new Error()
+    }
+  }
+
+  async findByEmail(email) {
+    try {
+      const userWithEmail = await User.findOne({ email })
+      return userWithEmail
+    } catch (error) {
+      console.error('Erro ao buscar usuário por email:', error)
       throw error
     }
   }

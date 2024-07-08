@@ -1,11 +1,8 @@
 import mongoose from 'mongoose'
-import 'dotenv/config'
 
 export async function dbConnect() {
   try {
-    mongoose.connect(
-      'mongodb+srv://brunasantiago:admin123@cluster.rbk79nw.mongodb.net/Dev?retryWrites=true&w=majority&appName=Cluster',
-    )
+    mongoose.connect(process.env.DB_CONNECTION_STRING)
 
     return mongoose.connection
   } catch (error) {

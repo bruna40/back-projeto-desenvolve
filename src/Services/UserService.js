@@ -1,29 +1,39 @@
 import bcrypt from 'bcryptjs'
-import { UserRepository } from '../repositories/UserRepository.js'
+import User from '../models/UserModel.js'
 
 export class UserService {
-  constructor() {
-    this.userRepository = new UserRepository()
-  }
-
-  async createUser({ name, email, passwordHash }) {
+  async createUser({ name, email, password }) {
     try {
-      const userWithEmail = await this.userRepository.findByEmail(email)
+      const userWithEmail = await this.findByEmail(email)
       if (userWithEmail) {
         throw new Error(`Email ${email} already exists`)
       }
 
-      const hashedPassword = await bcrypt.hash(passwordHash, 6)
+      if (typeof password !== 'string') {
+        throw new Error('Password must be a string')
+      }
 
-      const user = await this.userRepository.create({
+      const hashedPassword = await bcrypt.hash(password, 6)
+
+      const user = await User.create({
         name,
         email,
-        passwordHash: hashedPassword,
+        password: hashedPassword,
       })
 
-      return { user }
+      return user
     } catch (error) {
       console.error('Error in creating user:', error)
+      throw error
+    }
+  }
+
+  async findByEmail(email) {
+    try {
+      const userWithEmail = await User.findOne({ email })
+      return userWithEmail
+    } catch (error) {
+      console.error('Error finding user by email:', error)
       throw error
     }
   }

@@ -5,7 +5,7 @@ const ProductSchema = new mongoose.Schema(
     id: { type: mongoose.Schema.Types.ObjectId },
     brand: { type: String },
     name: { type: String, required: true },
-    price: { type: String, required: true },
+    price: { type: String },
     image_link: { type: String, required: true },
     createdAt: {
       type: Date,
@@ -19,4 +19,6 @@ const ProductSchema = new mongoose.Schema(
   { versionKey: false },
 )
 
-export default mongoose.model('Product', ProductSchema)
+const ProductModel = mongoose.model('Product', ProductSchema)
+
+export default ProductModel

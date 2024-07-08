@@ -1,13 +1,12 @@
-version: '3'
+version: '3.8'
 
 services:
   api-bonita-db:
-    image: mongo
+    image: mongodb/mongodb-atlas-local
     container_name: api-bonita-db
     restart: always
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: brunasanthiago
-      MONGO_INITDB_ROOT_PASSWORD: rootadmin123
-
+      MONGO_INITDB_ROOT_PASSWORD: admin123

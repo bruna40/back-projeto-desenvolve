@@ -1,14 +1,18 @@
 import { UserService } from '../Services/UserService.js'
-
-const userService = new UserService()
+import { UserRepository } from '../repositories/UserRepository.js'
 
 export const userCreate = async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, passwordHash } = req.body
+  const userRepository = new UserRepository()
 
   try {
-    await userService.createUser({ name, email, password })
+    const userService = new UserService(userRepository)
+
+    await userService.createUser({ name, email, passwordHash })
+
     res.status(201).send({ message: 'Usuário cadastrado com sucesso' })
   } catch (error) {
+    // Trata os erros apropriadamente
     console.error('Erro ao cadastrar usuário:', error)
 
     if (error.message.includes('Email')) {

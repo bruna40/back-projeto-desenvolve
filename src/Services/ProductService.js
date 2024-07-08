@@ -19,23 +19,13 @@ export class ProductService {
     }
   }
 
-  static async getAllProducts(startIndex, limit) {
+  static async getAllProducts() {
     try {
-      const products = await Product.find({}).skip(startIndex).limit(limit)
+      const products = await Product.find() // Utiliza Mongoose para buscar todos os produtos
       return products
     } catch (error) {
       console.error('Error in getting products:', error)
-      throw error
-    }
-  }
-
-  static async getNumberProducts() {
-    try {
-      const totalProducts = await Product.countDocuments()
-      return totalProducts
-    } catch (error) {
-      console.error('Error in getting number of products:', error)
-      throw error
+      throw error // Lança o erro para ser tratado pelo controlador ou outra parte da aplicação
     }
   }
 }

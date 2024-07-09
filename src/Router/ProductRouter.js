@@ -1,9 +1,14 @@
 import { Router } from 'express'
-import { getAll } from '../controller/ProductController.js'
+import { ProductController } from '../controller/ProductController.js'
 
 const router = Router()
 
-// Rota GET para buscar todos os produtos
-router.get('/products', getAll)
+router.get('/products', (req, res) => {
+  ProductController.getAll(req, res)
+})
+
+router.post('/products', (req, res) => {
+  ProductController.createProduct(req, res)
+})
 
 export default router

@@ -17,4 +17,16 @@ export class ProductService {
     const totalProducts = await Product.countDocuments().exec()
     return totalProducts
   }
+
+  // eslint-disable-next-line camelcase
+  static async create({ brand, name, price, image_link }) {
+    const createProduct = await Product.create({
+      brand,
+      name,
+      price,
+      // eslint-disable-next-line camelcase
+      image_link,
+    })
+    return createProduct
+  }
 }

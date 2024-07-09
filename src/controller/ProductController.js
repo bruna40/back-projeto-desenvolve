@@ -64,4 +64,15 @@ export class ProductController {
       res.status(500).json({ error: 'Internal server error' })
     }
   }
+
+  static async updateProduct(req, res) {
+    try {
+      const { id } = req.params
+      await ProductService.updateProduct(id, req.body)
+      res.status(204).end()
+    } catch (error) {
+      console.error('Error in update product:', error)
+      res.status(500).json({ error: 'Internal server error' })
+    }
+  }
 }

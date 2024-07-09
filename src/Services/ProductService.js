@@ -34,4 +34,11 @@ export class ProductService {
     const product = await Product.findById(id)
     return product
   }
+
+  static async updateProduct(id, update) {
+    const updatedProduct = await Product.findByIdAndUpdate(id, update, {
+      new: true,
+    })
+    return updatedProduct
+  }
 }

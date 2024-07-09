@@ -18,4 +18,8 @@ router.put('/products/:id', (req, res) => {
   ProductController.updateProduct(req, res)
 })
 
+router.delete('/products/:id', (req, res) => {
+  ProductController.deleteProduct(req, res)
+})
+
 export default router

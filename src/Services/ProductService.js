@@ -41,4 +41,9 @@ export class ProductService {
     })
     return updatedProduct
   }
+
+  static async deleteProduct(id) {
+    const deletedProduct = await Product.findByIdAndDelete(id)
+    return deletedProduct
+  }
 }

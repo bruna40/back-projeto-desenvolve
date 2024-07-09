@@ -29,4 +29,9 @@ export class ProductService {
     })
     return createProduct
   }
+
+  static async getById(id) {
+    const product = await Product.findById(id)
+    return product
+  }
 }

@@ -49,4 +49,19 @@ export class ProductController {
       res.status(500).json({ error: 'Internal server error' })
     }
   }
+
+  static async getProductById(req, res) {
+    try {
+      const { id } = req.params
+      const product = await ProductService.getById(id)
+      if (!product) {
+        res.status(404).json({ error: 'Product not found' })
+      } else {
+        res.status(200).json(product)
+      }
+    } catch (error) {
+      console.error('Error in getting product:', error)
+      res.status(500).json({ error: 'Internal server error' })
+    }
+  }
 }

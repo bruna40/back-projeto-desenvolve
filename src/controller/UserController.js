@@ -1,24 +1,60 @@
 import { UserService } from '../Services/UserService.js'
-import { UserRepository } from '../repositories/UserRepository.js'
 
-export const userCreate = async (req, res) => {
-  const { name, email, passwordHash } = req.body
-  const userRepository = new UserRepository()
+export class UserController {
+  static async getAll(req, res) {
+    try {
+      const users = await UserService.getAllUsers()
+      res.status(200).json(users)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 
-  try {
-    const userService = new UserService(userRepository)
+  static async createUser(req, res) {
+    try {
+      const user = await UserService.create(req.body)
+      res.status(201).json(user)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 
-    await userService.createUser({ name, email, passwordHash })
+  static async getUserById(req, res) {
+    try {
+      const user = await UserService.getById(req.params.id)
+      if (user) {
+        res.status(200).json(user)
+      } else {
+        res.status(404).json({ error: 'User not found' })
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 
-    res.status(201).send({ message: 'Usuário cadastrado com sucesso' })
-  } catch (error) {
-    // Trata os erros apropriadamente
-    console.error('Erro ao cadastrar usuário:', error)
+  static async updateUser(req, res) {
+    try {
+      const updatedUser = await UserService.updateUser(req.params.id, req.body)
+      if (updatedUser) {
+        res.status(200).json(updatedUser)
+      } else {
+        res.status(404).json({ error: 'User not found' })
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 
-    if (error.message.includes('Email')) {
-      res.status(409).send({ error: 'Email já cadastrado' })
-    } else {
-      res.status(500).send({ error: 'Erro interno do servidor' })
+  static async deleteUser(req, res) {
+    try {
+      const deletedUser = await UserService.deleteUser(req.params.id)
+      if (deletedUser) {
+        res.status(200).json(deletedUser)
+      } else {
+        res.status(404).json({ error: 'User not found' })
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message })
     }
   }
 }

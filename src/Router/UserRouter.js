@@ -1,25 +1,19 @@
-import { UserController } from '../controller/UserController.js'
 import { Router } from 'express'
+import { UserController } from '../controller/UserController.js'
+import { validacaoNome } from '../middleware/validacaoNome.js'
+import { validaEmail } from '../middleware/validaEmail.js'
 
 const router = Router()
 
-router.get('/user', (req, res) => {
-  UserController.getAll(req, res)
-})
-router.get('/user/:id', (req, res) => {
-  UserController.getUserById(req, res)
-})
+router
+  .get('/user', UserController.getAll)
 
-router.post('/user', (req, res) => {
-  UserController.createUser(req, res)
-})
+  .get('/user/:id', UserController.getUserById)
 
-router.put('/user/:id', (req, res) => {
-  UserController.updateUser(req, res)
-})
+  .post('/user', validacaoNome, validaEmail, UserController.createUser)
 
-router.delete('/user/:id', (req, res) => {
-  UserController.deleteUser(req, res)
-})
+  .put('/user/:id', UserController.updateUser)
+
+  .delete('/user/:id', UserController.deleteUser)
 
 export default router

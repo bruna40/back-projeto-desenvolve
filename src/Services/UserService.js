@@ -12,12 +12,23 @@ export class UserService {
   }
 
   static async create({ name, email, passwordHash }) {
-    const createUser = await User.create({
-      name,
-      email,
-      passwordHash,
-    })
-    return createUser
+    try {
+      const existingUser = await User.findOne({ email })
+
+      if (existingUser) {
+        return { error: 'User already exists' }
+      }
+      const newUser = await User.create({
+        name,
+        email,
+        passwordHash,
+      })
+
+      return newUser
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error creating user')
+    }
   }
 
   static async getById(id) {

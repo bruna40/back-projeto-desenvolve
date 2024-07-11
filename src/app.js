@@ -3,6 +3,7 @@ import { dbConnect } from './config/dbConnect.js'
 import UserRouter from './Router/UserRouter.js'
 import ProductRouter from './Router/ProductRouter.js'
 import cors from 'cors'
+import { errServer } from './middleware/errServer.js'
 
 dbConnect()
 
@@ -12,5 +13,6 @@ app.use(express.json())
 app.use(UserRouter)
 app.use(ProductRouter)
 app.use(cors())
+app.use(errServer)
 
 export default app

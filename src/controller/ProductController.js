@@ -1,7 +1,7 @@
 import { ProductService } from '../Services/ProductService.js'
 
 export class ProductController {
-  static async getAll(req, res) {
+  static async getAll(req, res, next) {
     try {
       const { page = 1, limit = 10 } = req.query
 
@@ -27,12 +27,11 @@ export class ProductController {
 
       res.status(200).json({ products, pagination })
     } catch (error) {
-      console.error('Error in getting products:', error)
-      res.status(500).json({ error: 'Internal server error' })
+      next(error)
     }
   }
 
-  static async createProduct(req, res) {
+  static async createProduct(req, res, next) {
     try {
       // eslint-disable-next-line camelcase
       const { brand, name, price, image_link } = req.body
@@ -45,12 +44,11 @@ export class ProductController {
       })
       res.status(201).json(newProduct)
     } catch (error) {
-      console.error('Error in creating product:', error)
-      res.status(500).json({ error: 'Internal server error' })
+      next(error)
     }
   }
 
-  static async getProductById(req, res) {
+  static async getProductById(req, res, next) {
     try {
       const { id } = req.params
       const product = await ProductService.getById(id)
@@ -60,30 +58,27 @@ export class ProductController {
         res.status(200).json(product)
       }
     } catch (error) {
-      console.error('Error in getting product:', error)
-      res.status(500).json({ error: 'Internal server error' })
+      next(error)
     }
   }
 
-  static async updateProduct(req, res) {
+  static async updateProduct(req, res, next) {
     try {
       const { id } = req.params
       await ProductService.updateProduct(id, req.body)
       res.status(204).end()
     } catch (error) {
-      console.error('Error in update product:', error)
-      res.status(500).json({ error: 'Internal server error' })
+      next(error)
     }
   }
 
-  static async deleteProduct(req, res) {
+  static async deleteProduct(req, res, next) {
     try {
       const { id } = req.params
       await ProductService.deleteProduct(id)
       res.status(204).end()
     } catch (error) {
-      console.error('Error in delete product:', error)
-      res.status(500).json({ error: 'Internal server error' })
+      next(error)
     }
   }
 }

@@ -47,7 +47,7 @@ export class UserController {
 
   static async deleteUser(req, res, next) {
     try {
-      const deletedUser = await UserService.deleteUser(req.params.id)
+      const deletedUser = await UserService.softDeleteUser(req.params.id)
       if (deletedUser) {
         res.status(200).json(deletedUser)
       } else {

@@ -7,13 +7,8 @@ const router = Router()
 
 router
   .get('/user', UserController.getAll)
-
   .get('/user/:id', UserController.getUserById)
-
   .post('/user', validacaoNome, validaEmail, UserController.createUser)
-
-  .put('/user/:id', UserController.updateUser)
-
   .delete('/user/:id', UserController.deleteUser)
 
 export default router

@@ -3,7 +3,7 @@ import User from '../models/UserModel.js'
 export class UserService {
   static async getAllUsers() {
     try {
-      const users = await User.find({})
+      const users = await User.findActive()
       return users
     } catch (error) {
       console.error('Error in getting users:', error)
@@ -43,8 +43,8 @@ export class UserService {
     return updatedUser
   }
 
-  static async deleteUser(id) {
-    const deletedUser = await User.findByIdAndDelete(id)
+  static async softDeleteUser(id) {
+    const deletedUser = await User.findByIdAndUpdate(id, { isDeleted: true })
     return deletedUser
   }
 }

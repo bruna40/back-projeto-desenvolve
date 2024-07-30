@@ -10,11 +10,16 @@ dbConnect()
 
 const app = express()
 
+app.use(
+  cors({
+    origin: 'http://127.0.0.1:5500', // Permite apenas o domínio do seu frontend
+  }),
+)
+
 app.use(express.json())
 app.use(UserRouter)
 app.use(ProductRouter)
 
-app.use(cors())
 app.use(errServer)
 app.use(notFound)
 

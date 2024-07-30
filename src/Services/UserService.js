@@ -1,4 +1,5 @@
 import User from '../models/UserModel.js'
+import bcrypt from 'bcryptjs'
 
 export class UserService {
   static async getAllUsers() {
@@ -18,10 +19,13 @@ export class UserService {
       if (existingUser) {
         return { error: 'User already exists' }
       }
+      console.log('Original password:', passwordHash)
+      const hashedPassword = await bcrypt.hash(passwordHash, 10)
+      console.log('Hashed password:', hashedPassword)
       const newUser = await User.create({
         name,
         email,
-        passwordHash,
+        passwordHash: hashedPassword,
       })
 
       return newUser

@@ -1,13 +1,15 @@
 version: '3'
 
 services:
-  api-bonita-db:
-    image: mongo
-    container_name: api-bonita-db
-    restart: always
+  app:
+    build:
+      context: .  
+      dockerfile: Dockerfile  
     ports:
-      - "27017:27017"
+      - "3000:3000"  
+    volumes:
+      - .:/app 
+    env_file:
+      - .env
     environment:
-      MONGO_INITDB_ROOT_USERNAME: process.env.MONGO_INITDB_ROOT_USERNAME
-      MONGO_INITDB_ROOT_PASSWORD: process.env.MONGO_INITDB_ROOT_PASSWORD
-
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}

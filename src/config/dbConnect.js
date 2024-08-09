@@ -4,8 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config() // Ensure this is at the top
 
 export async function dbConnect() {
-  const DB_CONNECTION_STRING =
-    'mongodb+srv://brunasantiago:admin123@cluster.rbk79nw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster'
+  const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING
   console.log('DB_CONNECTION_STRING:', DB_CONNECTION_STRING) // Debugging line
 
   if (!DB_CONNECTION_STRING) {

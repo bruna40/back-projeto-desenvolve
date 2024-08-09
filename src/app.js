@@ -10,27 +10,23 @@ dbConnect()
 
 const app = express()
 
-
-
 const allowedOrigins = [
   'https://1-projeto-desenvolve.vercel.app',
-  'https://outra-origem.com'
-];
+  'https://outra-origem.com',
+]
 
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
+      callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS'))
     }
   },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
-};
-app.use(
-  cors(corsOptions),
-)
+}
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(UserRouter)
 app.use(ProductRouter)

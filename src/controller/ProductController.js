@@ -8,7 +8,6 @@ export class ProductController {
       const startIndex = (page - 1) * limit
       const endIndex = page * limit
 
-      // Ajuste o método de serviço para considerar a pesquisa
       const totalProducts = await ProductService.getNumberProducts(search)
       const products = await ProductService.getAllProducts(
         startIndex,

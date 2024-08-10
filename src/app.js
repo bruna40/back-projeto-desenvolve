@@ -11,10 +11,7 @@ dbConnect()
 
 const app = express()
 
-const allowedOrigins = [
-  'https://1-projeto-desenvolve.vercel.app',
-  'https://outra-origem.com',
-]
+const allowedOrigins = ['https://1-projeto-desenvolve.vercel.app']
 
 const corsOptions = {
   origin: (origin, callback) => {

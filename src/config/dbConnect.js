@@ -1,15 +1,13 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config() // Ensure this is at the top
 
 export async function dbConnect() {
   const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING
-  console.log('DB_CONNECTION_STRING:', DB_CONNECTION_STRING) // Debugging line
 
   if (!DB_CONNECTION_STRING) {
     throw new Error('Database connection string is not defined')
   }
+
+  console.log('DB_CONNECTION_STRING:', DB_CONNECTION_STRING) // Debugging line
 
   try {
     await mongoose.connect(DB_CONNECTION_STRING, {

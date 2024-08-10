@@ -7,7 +7,7 @@ export async function dbConnect() {
     throw new Error('Database connection string is not defined')
   }
 
-  console.log('DB_CONNECTION_STRING:', DB_CONNECTION_STRING) // Debugging line
+  console.log('DB_CONNECTION_STRING:', DB_CONNECTION_STRING)
 
   try {
     await mongoose.connect(DB_CONNECTION_STRING, {
@@ -17,6 +17,6 @@ export async function dbConnect() {
     console.log('Database connected successfully')
   } catch (error) {
     console.error('Error connecting to MongoDB Atlas:', error)
-    throw error // Rethrow to handle higher up
+    throw error
   }
 }

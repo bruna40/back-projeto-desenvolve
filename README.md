@@ -2,6 +2,8 @@ A implementação de paginação está configurada na rota /products. Aqui está
 
 Rota:
 
+exemplo: http://localhost:3000/products?page=1&limit=10&search=Eyeshadow
+
 GET /products: Retorna uma lista paginada de produtos.
 Parâmetros de query:
 page (opcional): Número da página a ser exibida (padrão: 1).

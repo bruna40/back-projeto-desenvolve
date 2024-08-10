@@ -3,13 +3,18 @@ import { ProductService } from '../Services/ProductService.js'
 export class ProductController {
   static async getAll(req, res, next) {
     try {
-      const { page = 1, limit = 10 } = req.query
+      const { page = 1, limit = 10, search = '' } = req.query
 
       const startIndex = (page - 1) * limit
       const endIndex = page * limit
 
-      const totalProducts = await ProductService.getNUmberProducts()
-      const products = await ProductService.getAllProducts(startIndex, limit)
+      // Ajuste o método de serviço para considerar a pesquisa
+      const totalProducts = await ProductService.getNumberProducts(search)
+      const products = await ProductService.getAllProducts(
+        startIndex,
+        limit,
+        search,
+      )
 
       const pagination = {
         currentPage: parseInt(page),

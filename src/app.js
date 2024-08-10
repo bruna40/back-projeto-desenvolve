@@ -1,4 +1,5 @@
 import express from 'express'
+import 'dotenv/config'
 import { dbConnect } from './config/dbConnect.js'
 import UserRouter from './Router/UserRouter.js'
 import ProductRouter from './Router/ProductRouter.js'

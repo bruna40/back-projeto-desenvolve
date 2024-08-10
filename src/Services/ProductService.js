@@ -1,21 +1,22 @@
 import Product from '../models/ProductModel.js'
 
 export class ProductService {
-  static async getAllProducts(startIndex, limit) {
+  static async getAllProducts(startIndex, limit, search) {
     try {
-      const products = await Product.find({})
-        .skip(startIndex)
-        .limit(parseInt(limit))
-      return products
+      const query = search ? { name: { $regex: search, $options: 'i' } } : {}
+      return await Product.find(query).skip(startIndex).limit(limit)
     } catch (error) {
-      console.error('Error in getting products:', error)
-      throw error
+      throw new Error('Error getting products')
     }
   }
 
-  static async getNUmberProducts() {
-    const totalProducts = await Product.countDocuments().exec()
-    return totalProducts
+  static async getNumberProducts(search) {
+    try {
+      const query = search ? { name: { $regex: search, $options: 'i' } } : {}
+      return await Product.countDocuments(query)
+    } catch (error) {
+      throw new Error('Error getting number of products')
+    }
   }
 
   // eslint-disable-next-line camelcase

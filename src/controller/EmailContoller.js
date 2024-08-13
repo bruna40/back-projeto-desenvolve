@@ -1,4 +1,4 @@
-import { sendEmail } from '../Services/EmailService.js'
+import { sendEmail } from '../config/emailConfig.js'
 
 /**
  * Controlador para enviar e-mail.

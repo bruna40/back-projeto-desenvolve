@@ -1,10 +1,25 @@
-A implementação de paginação está configurada na rota /products. Aqui está um resumo de como foi implementada:
+# API de Produtos de Cosméticos
 
-Rota:
+Esta API permite listar produtos de cosméticos e oferece uma rota para o envio de emails.
 
-exemplo: http://localhost:3000/products?page=1&limit=10&search=Eyeshadow
+## Funcionalidades
 
-GET /products: Retorna uma lista paginada de produtos.
-Parâmetros de query:
-page (opcional): Número da página a ser exibida (padrão: 1).
-limit (opcional): Número de produtos por página (padrão: 10).
+- Listagem de produtos de cosméticos.
+- Envio de emails através de uma rota específica.
+
+## Instalação
+
+Certifique-se de ter o [Docker](https://docs.docker.com/get-docker/) e o [Git](https://git-scm.com/) instalados.
+
+1. Clone o repositório:
+
+   ```bash
+   git clone  https://github.com/bruna40/back-projeto-desenvolve.git
+
+   ```
+
+2. Rode o Docker:
+
+   ```bash
+   docker compose up
+    ```
